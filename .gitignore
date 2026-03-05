@@ -1,0 +1,23 @@
+# Python
+venv/
+.venv/
+__pycache__/
+*.pyc
+.env
+
+# IDEs
+.idea/
+.vscode/
+*.iml
+
+# Flutter
+students/bus_tracking_app/.dart_tool/
+students/bus_tracking_app/.flutter-plugins
+students/bus_tracking_app/.flutter-plugins-dependencies
+students/bus_tracking_app/.pub-cache/
+students/bus_tracking_app/.pub/
+students/bus_tracking_app/build/
+
+# OS
+.DS_Store
+Thumbs.db

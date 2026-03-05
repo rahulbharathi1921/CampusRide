@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campusride Buses</title>
+    <link rel="stylesheet" href="../assets/css/managebus.css">
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>ADMIN</h2>
+        <a href="dashboard.html">Dashboard</a>
+        <a class="active" href="managebus.html"> > Bus Management</a>
+        <a href="manageroute.html"> > Routes</a>
+        <a href="analytics.html"> > Analytics</a>
+        <a href="profile.html">Profile</a>
+        <a href="#" onclick="logout()">Logout</a>
+    </div>
+
+    <!-- Logout Script -->
+    <script>
+        function logout() {
+            localStorage.clear();
+            window.location.replace("../login/login.html");
+        }
+    </script>
+
+
+    <!-- Main Content -->
+    <div class="main">
+        <h2>Manage Buses</h2>
+
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+            <button class="action-btn add-btn" id="showAddBusForm">Add Bus</button>
+            <button class="action-btn edit-btn" id="showEditBusForm">Edit Bus</button>
+            <button class="action-btn delete-btn" id="showDeleteBusForm">Delete Bus</button>
+        </div>
+
+        <!-- Add Bus Form (hidden by default) -->
+        <div class="add-bus-form" id="addBusForm" style="display:none;">
+            <h4>Add New Bus</h4>
+
+            <select id="busName">
+                <option value="">Select Bus Name</option>
+                <option value="DMI Engineering College">DMI Engineering College</option>
+                <option value="St. Joseph School of Law">St. Joseph School of Law</option>
+            </select>
+
+            <input type="number" id="routeNo" placeholder="Route No" min="1">
+            <input type="number" id="seatCap" placeholder="Seat Capacity" min="1">
+
+            <div class="form-buttons">
+                <button class="action-btn add-btn" id="addBusBtn">Add Bus</button>
+                <button class="action-btn delete-btn" id="cancelBtn">Cancel</button>
+            </div>
+        </div>
+
+        <!-- Edit Bus Form (hidden by default) -->
+        <div class="edit-bus-form" id="editBusForm" style="display:none;">
+            <h4>Edit Bus</h4>
+
+            <select id="editBusId">
+                <option value="">Select Bus ID</option>
+            </select>
+
+            <input type="text" id="editBusName" placeholder="Bus Name">
+            <input type="number" id="editRouteNo" placeholder="Route No">
+            <input type="number" id="editSeatCap" placeholder="Seat Capacity">
+
+            <div class="form-buttons">
+                <button class="action-btn edit-btn" id="updateBusBtn">Update</button>
+                <button class="action-btn delete-btn" id="editCancelBtn">Cancel</button>
+            </div>
+        </div>
+
+        <!-- Delete Bus Form (hidden by default) -->
+        <div class="delete-bus-form" id="deleteBusForm" style="display:none;">
+            <h4>Delete Bus</h4>
+
+            <!-- Select Bus ID -->
+            <select id="deleteBusId">
+                <option value="">Select Bus ID</option>
+            </select>
+
+            <div class="form-buttons">
+                <button class="action-btn delete-btn" id="confirmDeleteBtn">
+                    Delete
+                </button>
+
+                <button class="action-btn cancel-btn" id="deleteCancelBtn">
+                    Cancel
+                </button>
+            </div>
+        </div>
+
+        <!-- Buses Table -->
+        <div class="table-container">
+            <table class="bus-table">
+                <thead>
+                    <tr>
+                        <th>Bus ID</th>
+                        <th>Bus Name</th>
+                        <th>Route No</th>
+                        <th>Seat Capacity</th>
+                    </tr>
+                </thead>
+                <tbody id="busTableBody">
+                    <!-- All bus rows will come from DB -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- JS for Add Bus Functionality -->
+
+    <script src="../assets/js/managebus.js"></script>
+
+</body>
+
+</html>

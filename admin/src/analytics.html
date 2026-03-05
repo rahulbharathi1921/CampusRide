@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Campusride Analytics</title>
+  <link rel="stylesheet" href="../assets/css/analytics.css">
+</head>
+
+<body>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h2>Admin</h2>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="managebus.html"> > Bus Management</a>
+    <a href="manageroute.html"> > Routes</a>
+    <a class="active" href="analytics.html"> > Analytics</a>
+    <a href="profile.html">Profile</a>
+    <a href="#" onclick="logout()">Logout</a>
+  </div>
+
+  <!-- Logout Script -->
+  <script>
+    function logout() {
+      localStorage.clear();
+      window.location.replace("../login/login.html");
+    }
+  </script>
+
+
+  <!-- Main Content -->
+  <div class="main">
+
+    <h1>📊 Analytics Overview</h1>
+    <p class="subtitle">Track buses, routes and stop performance</p>
+
+    <!-- Analytics Cards -->
+    <div class="cards">
+
+      <div class="card">
+        <h3>Total Buses</h3>
+        <p id="busCount">0</p>
+      </div>
+
+
+      <div class="card">
+        <h3>Active Buses</h3>
+        <p id="activeBusCount">0</p>
+      </div>
+
+      <div class="card">
+        <h3>Total Stops</h3>
+        <p id="stopCount">0</p>
+      </div>
+
+
+    </div>
+
+    <!-- Table Section -->
+    <div class="table-box">
+      <h2>🕒 Upcoming Arrivals</h2>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Bus Name</th>
+            <th>Route</th>
+            <th>Next Stop</th>
+            <th>Arrival Time</th>
+          </tr>
+        </thead>
+
+        <tbody id="arrivalTable">
+          <!-- JS will insert rows -->
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+  <script src="../assets/js/analytics.js"></script>
+</body>
+
+</html>

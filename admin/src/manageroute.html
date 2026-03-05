@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campusride Routes</title>
+    <link rel="stylesheet" href="../assets/css/manageroute.css">
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>ADMIN</h2>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="managebus.html"> > Bus Management</a>
+        <a class="active" href="manageroute.html"> > Routes</a>
+        <a href="analytics.html"> > Analytics</a>
+        <a href="profile.html">Profile</a>
+        <a href="#" onclick="logout()">Logout</a>
+    </div>
+
+    <!-- Logout Script -->
+    <script>
+        function logout() {
+            localStorage.clear();
+            window.location.replace("../login/login.html");
+        }
+    </script>
+
+
+    <!-- Main Content -->
+    <div class="main">
+        <h2>Manage Stops</h2>
+
+        <!-- Select Bus -->
+        <div class="bus-select">
+            <label for="busSelect">Select Bus:</label>
+
+            <select id="busSelect">
+                <option value="">Loading buses...</option>
+            </select>
+        </div>
+
+
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+            <button class="action-btn add-btn" id="showAddStopForm">Add Stop</button>
+            <button class="action-btn edit-btn" id="showEditStopForm">Edit Stop</button>
+            <button class="action-btn delete-btn" id="showDeleteStopForm">Delete Stop</button>
+        </div>
+
+        <!-- Add Stop Form -->
+        <div class="add-stop-form" id="addStopForm" style="display:none;">
+            <h4>Add New Stop</h4>
+            <input type="text" id="stopName" placeholder="Stop Name">
+            <input type="text" id="stopTime" placeholder="Arrival Time (HH:MM)">
+            <div class="form-buttons">
+                <button class="action-btn add-btn" id="addStopBtn">Add Stop</button>
+                <button class="action-btn delete-btn" id="cancelAddStopBtn">Cancel</button>
+            </div>
+        </div>
+
+        <!-- Edit Stop Form -->
+        <div class="edit-stop-form" id="editStopForm" style="display:none;">
+            <h4>Edit Stop</h4>
+            <select id="editStopSelect">
+                <option value="">Select Stop</option>
+            </select>
+
+            <input type="text" id="editStopTime" placeholder="Arrival Time">
+            <div class="form-buttons">
+                <button class="action-btn edit-btn" id="updateStopBtn">Update</button>
+                <button class="action-btn delete-btn" id="cancelEditStopBtn">Cancel</button>
+            </div>
+        </div>
+
+        <!-- Delete Stop Form -->
+        <div class="delete-stop-form" id="deleteStopForm" style="display:none;">
+            <h4>Delete Stop</h4>
+            <select id="deleteStopSelect">
+                <option value="">Select Stop</option>
+            </select>
+            <div class="form-buttons">
+                <button class="action-btn delete-btn" id="confirmDeleteStopBtn">Delete</button>
+                <button class="action-btn cancel-btn" id="cancelDeleteStopBtn">Cancel</button>
+            </div>
+        </div>
+
+        <!-- Stops Table -->
+        <div class="table-container">
+            <table class="stop-table">
+                <thead>
+                    <tr>
+                        <th>Stop Name</th>
+                        <th>Arrival Time</th>
+                    </tr>
+                </thead>
+                <tbody id="stopTableBody">
+                    <!-- Stops will load from DB -->
+                </tbody>
+
+            </table>
+        </div>
+
+    </div>
+
+    <script src="../assets/js/manageroute.js"></script>
+
+</body>
+
+</html>

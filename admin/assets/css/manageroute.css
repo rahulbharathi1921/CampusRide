@@ -1,0 +1,237 @@
+/* ===== Global Reset ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", sans-serif;
+}
+
+/* ===== Body ===== */
+body {
+    display: flex;
+    min-height: 100vh;
+    background: #eef7ff;
+}
+
+/* ===== Sidebar ===== */
+.sidebar {
+    width: 250px;
+    background: #1a1a2e;
+    color: white;
+    padding: 25px;
+}
+
+.sidebar h2 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.sidebar a {
+    display: block;
+    padding: 12px;
+    margin: 8px 0;
+    text-decoration: none;
+    color: white;
+    border-radius: 8px;
+    transition: 0.3s;
+
+}
+
+.sidebar a:hover {
+    background: #3a3a5e;
+}
+
+.sidebar a.active {
+    background: #007bff;
+}
+
+/* ===== Main Content ===== */
+.main {
+    flex: 1;
+    padding: 40px 50px;
+    background: transparent;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+/* Page Title */
+.main h2 {
+    text-align: center;
+    font-size: 32px;
+    color: #264653;
+}
+
+/* ===== Bus Select ===== */
+.bus-select {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.bus-select label {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.bus-select select {
+    padding: 12px 15px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    outline: none;
+    min-width: 220px;
+    appearance: none;
+    background: #fff url("data:image/svg+xml,%3Csvg width='12' height='7' viewBox='0 0 12 7'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23333' stroke-width='2' fill='none'/%3E%3C/svg%3E") no-repeat right 12px center;
+}
+
+/* ===== Action Buttons ===== */
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+
+.action-btn {
+    width: 180px;
+    height: 60px;
+    border-radius: 15px;
+    border: none;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+    transition: all 0.3s ease;
+}
+
+.add-btn {
+    background: #F5C63A;
+}
+
+.edit-btn {
+    background: #FFA28C;
+}
+
+.delete-btn {
+    background: #8CCEFF;
+}
+
+.action-btn:hover {
+    transform: translateY(-3px);
+    filter: brightness(90%);
+}
+
+/* ===== Forms ===== */
+.add-stop-form,
+.edit-stop-form,
+.delete-stop-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 25px;
+    margin: 20px auto;
+    background: #f7f7f7;
+    border-radius: 15px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    max-width: 700px;
+}
+
+.add-stop-form input,
+.edit-stop-form input,
+.add-stop-form select,
+.edit-stop-form select,
+.delete-stop-form select {
+    padding: 12px 15px;
+    font-size: 16px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    outline: none;
+    height: 45px;
+    width: 100%;
+}
+
+.add-stop-form input:focus,
+.edit-stop-form input:focus,
+.add-stop-form select:focus,
+.edit-stop-form select:focus,
+.delete-stop-form select:focus {
+    border-color: #41B3A3;
+    box-shadow: 0 0 6px rgba(65, 179, 163, 0.4);
+}
+
+.form-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: flex-end;
+}
+
+.form-buttons button {
+    height: 45px;
+    width: 130px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+}
+
+.form-buttons .add-btn {
+    background: #F5C63A;
+    color: #fff;
+}
+
+.form-buttons .edit-btn {
+    background: #FFA28C;
+    color: #fff;
+}
+
+.form-buttons .delete-btn {
+    background: #8CCEFF;
+    color: #fff;
+}
+
+.form-buttons button:hover {
+    transform: translateY(-2px);
+    filter: brightness(90%);
+}
+
+/* ===== Stops Table ===== */
+.table-container {
+    overflow-x: auto;
+}
+
+.stop-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.stop-table th,
+.stop-table td {
+    padding: 15px 12px;
+    text-align: center;
+}
+
+.stop-table th {
+    background: #41B3A3;
+    color: #fff;
+}
+
+.stop-table td {
+    font-size: 16px;
+    color: #333;
+    border-bottom: 1px solid #ddd;
+}
+
+.stop-table tbody tr:hover {
+    background: #e0f2f1;
+}
+
+.sidebar a.active {
+    background: #007bff;
+}

@@ -1,0 +1,97 @@
+/* ===== Global Reset ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
+}
+
+/* ===== Full Page Background ===== */
+body {
+  background: #ffffff; /* Lightest pastel blue */
+  height: 100vh;
+  width: 100vw;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ===== Login Card Box ===== */
+.login-box {
+  width: 800px;           /* bigger width for roomy look */
+  min-height: 500px;      /* taller height */
+  background: #dbf0ff;    /* pure white */
+  padding: 50px 40px;
+  border-radius: 20px;     /* slightly bigger rounding */
+
+  border: 2px solid #dbf0ff; /* soft blue border */
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1); /* subtle shadow for depth */
+  text-align: center;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ===== Title ===== */
+.login-box h2 {
+  margin-bottom: 15px;
+  color: #007bff;
+  font-size: 38px;  /* slightly bigger for bigger box */
+  font-weight: bold;
+}
+
+.login-box h3 {
+  margin-bottom: 30px;
+  font-size: 18px;
+  color: #333;
+}
+
+/* ===== Input Fields ===== */
+.login-box input {
+  width: 70%;          /* slightly wider for bigger box */
+  max-width: 400px;
+  padding: 14px;
+  margin: 12px 0;
+
+  border-radius: 10px;
+  border: 1px solid #e8e8e8;
+  font-size: 15px;
+
+  outline: none;
+}
+
+.login-box input:focus {
+  border-color: #007bff;
+}
+
+/* ===== Button ===== */
+.login-box button {
+  width: 70%;         /* same width as inputs */
+  max-width: 400px;
+  padding: 14px;
+  margin-top: 20px;
+
+  border: none;
+  border-radius: 12px;
+
+  background: #4da6ff; /* Soft light blue */
+  color: white;
+
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.login-box button:hover {
+  background: #1e90ff;
+}
+
+/* ===== Error Message ===== */
+#msg {
+  margin-top: 15px;
+  font-size: 14px;
+  color: red;
+}

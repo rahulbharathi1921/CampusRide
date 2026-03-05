@@ -1,0 +1,387 @@
+/* ===== Global Reset ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
+}
+
+/* ===== Body ===== */
+body {
+  display: flex;
+  min-height: 100vh;
+  background: #eef7ff;
+}
+
+/* ===== Sidebar ===== */
+.sidebar {
+  width: 250px;
+  background: #1a1a2e;
+  color: white;
+  padding: 25px;
+}
+
+.sidebar h2 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.sidebar a {
+  display: block;
+  padding: 12px;
+  margin: 8px 0;
+  text-decoration: none;
+  color: white;
+  border-radius: 8px;
+  transition: 0.3s;
+
+}
+
+.sidebar a:hover {
+  background: #3a3a5e;
+}
+
+.sidebar a.active {
+  background: #007bff;
+}
+
+/* ===== Main Content ===== */
+.main {
+  flex: 1;
+  background: transparent;
+  padding: 50px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  min-height: 100vh;
+}
+
+/* Page Title */
+.main h2 {
+  font-size: 32px;
+  color: #264653;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+/* ===== Action Buttons ===== */
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.action-btn {
+  width: 220px;
+  height: 90px;
+  border-radius: 20px;
+  font-size: 20px;
+  font-weight: bold;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0px 8px 25px rgba(0,0,0,0.15);
+  transition: 0.3s;
+}
+
+/* Individual Colors */
+.add-btn { background: #F5C63A; }
+.edit-btn { background: #FFA28C; }
+.delete-btn { background: #8CCEFF; }
+
+/* Hover Effects */
+.add-btn:hover { background: #F2C94C; }
+.edit-btn:hover { background: #FF937E; }
+.delete-btn:hover { background: #69C0FF; }
+.action-btn:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 12px 30px rgba(0,0,0,0.25);
+}
+
+
+/* ===== Add Bus Form ===== */
+/* ===== Add Bus Form ===== */
+.add-bus-form {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: nowrap; /* keeps it responsive on super small screens */
+  margin: 20px auto;
+  padding: 20px 25px;
+  background: #f7f7f7;
+  border-radius: 15px;
+  box-shadow: 0px 8px 25px rgba(0,0,0,0.1);
+}
+
+/* Inputs and Select */
+.add-bus-form input,
+.add-bus-form select {
+  padding: 12px 15px;
+  font-size: 16px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  outline: none;
+  height: 50px;
+  box-sizing: border-box;
+}
+
+/* Focus Effect */
+.add-bus-form input:focus,
+.add-bus-form select:focus {
+  border-color: #41B3A3;
+}
+
+/* Reduce width of Bus Name select */
+.add-bus-form select#busName {
+  flex: 0 0 150px; /* fixed width */
+  padding: 12px 35px 12px 15px; /* top/right/bottom/left */
+  font-size: 16px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  outline: none;
+  height: 50px;
+  appearance: none; /* remove default arrow (for styling) */
+  background: #fff url("data:image/svg+xml;charset=US-ASCII,%3Csvg width='12' height='7' viewBox='0 0 12 7' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23333' stroke-width='2' fill='none' fill-rule='evenodd'/%3E%3C/svg%3E") no-repeat right 12px center;
+  background-size: 12px 7px;
+  box-sizing: border-box;
+}
+
+/* Dropdown text spacing */
+.add-bus-form select#busName option {
+  padding-right: 10px;  /* space between text and right edge */
+}
+
+/* Route No and Seat Cap inputs - reduced width */
+.add-bus-form input#routeNo,
+.add-bus-form input#seatCap {
+  flex: 0 0 100px;  /* reduced width from 120px to 100px */
+  padding: 5px 10px; /* smaller padding for compact look */
+  font-size: 16px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  height: 50px;
+  box-sizing: border-box;
+}
+
+/* Buttons container */
+.add-bus-form .form-buttons {
+  display: flex;
+  gap: 10px;
+  flex-shrink: 0; /* prevent shrinking */
+}
+
+/* Buttons inside form */
+.add-bus-form button {
+  height: 50px;
+  width: 120px;    /* slightly smaller to fit nicely */
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.add-bus-form button:hover {
+  filter: brightness(90%);
+  transform: translateY(-3px);
+}
+
+
+/* ===== Table ===== */
+.table-container {
+  overflow-x: auto;
+}
+
+.bus-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+  background: #f7f7f7;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0px 6px 20px rgba(0,0,0,0.08);
+}
+
+th, td {
+  padding: 15px 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+th {
+  background: #41B3A3;
+  color: #fff;
+  font-size: 18px;
+}
+
+tbody tr:hover { background: #e0f2f1; }
+tbody td { font-size: 16px; color: #333; }
+
+/* ============================= */
+/* ===== Edit Bus Form Box ===== */
+/* ============================= */
+
+.edit-bus-form {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: nowrap;   /* ✅ Keeps everything in one line */
+  margin: 20px auto;
+  padding: 20px 25px;
+  background: #f7f7f7;
+  border-radius: 15px;
+  box-shadow: 0px 8px 25px rgba(0,0,0,0.1);
+  overflow-x: hidden;
+  max-width: 100%;
+
+}
+/* Heading inside Edit Form */
+.edit-bus-form h4 {
+  font-size: 18px;
+  font-weight: bold;
+  margin-right: 10px;
+  white-space: nowrap;
+}
+
+/* Inputs + Select */
+.edit-bus-form input,
+.edit-bus-form select {
+  padding: 12px 15px;
+  font-size: 16px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  outline: none;
+  height: 50px;
+  box-sizing: border-box;
+}
+
+/* Focus effect */
+.edit-bus-form input:focus,
+.edit-bus-form select:focus {
+  border-color: #41B3A3;
+}
+
+/* Dropdown (Bus ID Select) */
+.edit-bus-form select#editBusId {
+  flex: 0 0 150px;
+  padding: 12px 35px 12px 15px;
+  appearance: none;
+  background: #fff url("data:image/svg+xml;charset=US-ASCII,%3Csvg width='12' height='7' viewBox='0 0 12 7' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23333' stroke-width='2' fill='none'/%3E%3C/svg%3E") no-repeat right 12px center;
+  background-size: 12px 7px;
+}
+
+/* Input widths */
+.edit-bus-form input#editBusName {
+  flex: 0 0 220px;
+}
+
+.edit-bus-form input#editRouteNo,
+.edit-bus-form input#editSeatCap {
+  flex: 0 0 60px;
+   width: 142px;
+}
+
+/* Buttons container */
+.edit-bus-form .form-buttons {
+  display: flex;
+  gap: 10px;
+  margin-left: auto; /* ✅ Push buttons to right */
+}
+
+/* Buttons */
+.edit-bus-form button {
+  height: 50px;
+  width: 120px;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+/* Update button */
+.edit-bus-form .edit-btn {
+  background: #ff9966;
+  color: white;
+}
+
+/* Cancel button */
+.edit-bus-form .delete-btn {
+  background: #7ec3ff;
+  color: white;
+}
+
+/* Hover effect */
+.edit-bus-form button:hover {
+  filter: brightness(90%);
+  transform: translateY(-3px);
+}
+
+/* ============================= */
+/* ===== Delete Bus Form ======= */
+/* ============================= */
+
+.delete-bus-form {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: nowrap;
+
+  margin: 20px auto;
+  padding: 20px 25px;
+  background: #f7f7f7;
+  border-radius: 15px;
+  box-shadow: 0px 8px 25px rgba(0,0,0,0.1);
+
+  max-width: 100%;
+}
+
+/* Heading */
+.delete-bus-form h4 {
+  font-size: 18px;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+/* Dropdown */
+.delete-bus-form select {
+  flex: 0 0 180px;
+  padding: 12px 35px 12px 15px;
+  font-size: 16px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  height: 50px;
+  outline: none;
+
+  appearance: none;
+  background: #fff url("data:image/svg+xml;charset=US-ASCII,%3Csvg width='12' height='7' viewBox='0 0 12 7' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23333' stroke-width='2' fill='none'/%3E%3C/svg%3E") no-repeat right 12px center;
+  background-size: 12px 7px;
+}
+
+/* Buttons */
+.delete-bus-form .form-buttons {
+  display: flex;
+  gap: 10px;
+  margin-left: auto;
+}
+
+.delete-bus-form button {
+  height: 50px;
+  width: 110px;
+  border-radius: 10px;
+  font-size: 15px;
+  cursor: pointer;
+  border: none;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+/* Hover */
+.delete-bus-form button:hover {
+  filter: brightness(90%);
+  transform: translateY(-3px);
+}
+
+.sidebar a.active {
+  background: #007bff;
+}

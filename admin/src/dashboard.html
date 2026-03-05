@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Campusride Dashboard</title>
+  <link rel="stylesheet" href="../assets/css/dashboard.css">
+</head>
+
+<body>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h2>ADMIN</h2>
+    <a href="#">Dashboard</a>
+    <a href="profile.html">Profile</a>
+    <a href="#" onclick="logout()">Logout</a>
+  </div>
+
+  <!-- Logout Script -->
+  <script>
+    function logout() {
+      localStorage.clear();
+      window.location.replace("login.html");
+    }
+  </script>
+
+  <!-- Main Content -->
+  <div class="main">
+    <h1>Welcome Admin👋</h1>
+    <!-- Centered Big Manage Buttons -->
+    <div class="manage-buttons">
+      <a href="managebus.html">
+        <button class="bus-btn big-btn">Manage Buses</button>
+      </a>
+
+      <a href="manageroute.html">
+        <button class="route-btn big-btn">Manage Routes</button>
+      </a>
+
+      <a href="analytics.html">
+        <button class="analytics-btn big-btn">Analytics</button>
+      </a>
+    </div>
+
+
+    <!-- Stats Rectangles -->
+    <div class="stats-rectangles">
+      <div class="rect-card">
+        <h3>Total Buses</h3>
+        <p>15</p>
+      </div>
+      <div class="rect-card">
+        <h3>Total Routes</h3>
+        <p>15</p>
+      </div>
+      <div class="rect-card sos-card">
+        <h3>SOS Registered Today</h3>
+        <p>NIL</p>
+      </div>
+    </div>
+
+  </div>
+
+ 
+
+<script src="../assets/js/dashboard.js"></script>
+
+
+</body>
+</html>

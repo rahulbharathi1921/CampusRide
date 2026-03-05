@@ -1,0 +1,231 @@
+/* ===== Global Reset ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
+}
+
+/* ===== Body ===== */
+body {
+  background: #eef7ff; /* lightest pastel blue */
+  display: flex;
+  min-height: 100vh;
+}
+
+/* ===== Sidebar ===== */
+.sidebar {
+  width: 250px;
+  background: #1a1a2e; /* dark sidebar */
+  padding: 30px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+}
+
+.sidebar h2 {
+  color: #ffffff; 
+  font-size: 24px;
+  margin-bottom: 20px;
+  text-align: center;
+  padding-right: 20px;
+}
+
+.sidebar a {
+  text-decoration: none;
+  color: #ffffff; 
+  font-size: 16px;
+  padding: 10px 15px;
+  border-radius: 10px;
+  transition: 0.3s;
+}
+
+.sidebar a:hover {
+  background: #4da6ff;
+  color: #1a1a2e; 
+}
+
+/* ===== Main Content ===== */
+.main {
+  flex: 1;
+  background: transparent; /* white main area */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* vertical centering */
+  gap: 80px; /* more space between manage buttons and stats */
+  padding: 50px 40px;
+  min-height: 100vh; /* full page height */
+}
+
+/* ===== Big Manage Buttons ===== */
+.manage-buttons {
+  display: flex;
+  justify-content: space-around; /* spread buttons across page width */
+  gap: 60px; /* space between buttons */
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.big-btn {
+  width: 325px;       /* increased width */
+  height: 260px;      /* increased height */
+  font-size: 28px;    /* bigger text */
+  font-weight: bold;
+  border-radius: 25px;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0px 12px 35px rgba(0,0,0,0.18);
+  transition: 0.3s;
+}
+
+/*
+.bus-btn:hover {
+  background: #2A9D8F; 
+  transform: translateY(-5px);
+  box-shadow: 0px 18px 40px rgba(0,0,0,0.25);
+}
+
+.route-btn:hover {
+  background: #E07A5F; 
+  transform: translateY(-5px);
+  box-shadow: 0px 18px 40px rgba(0,0,0,0.25);
+}
+
+.analytics-btn:hover {
+  background: #8E7CC3; 
+  transform: translateY(-5px);
+  box-shadow: 0px 18px 40px rgba(0,0,0,0.25);
+}
+.big-btn:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 18px 40px rgba(0,0,0,0.25);
+}
+
+.bus-btn {
+  background: #48B3A1; 
+.route-btn {
+  background:#EA947B; 
+}
+.analytics-btn {
+  background: #A892D1; 
+}
+*/
+/* ===== Manage Buttons: Light Normal Colors ===== */
+.bus-btn {
+  background: #65c5f5; /* soft rich teal */
+}
+.route-btn {
+  background: #65c5f5; /* soft rich clay */
+}
+.analytics-btn {
+  background: #65c5f5; /* soft rich lavender */
+}
+/* ===== Hover Effect: Slightly Darker Shades ===== */
+.bus-btn:hover {
+  background: #92dbff; /* Darker Deep Teal */
+  transform: translateY(-5px);
+  box-shadow: 0px 18px 40px rgba(0,0,0,0.25);
+}
+
+.route-btn:hover {
+  background: #92dbff; /* Darker Muted Peach/Clay */
+  transform: translateY(-5px);
+  box-shadow: 0px 18px 40px rgba(0,0,0,0.25);
+}
+
+.analytics-btn:hover {
+  background: #92dbff; /* Darker Soft Lavender */
+  transform: translateY(-5px);
+  box-shadow: 0px 18px 40px rgba(0,0,0,0.25);
+}
+
+/* ===== Stats Rectangles ===== */
+.stats-rectangles {
+  display: flex;
+  gap: 50px;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+
+}
+
+.rect-card {
+  background: #f0f0f0;
+  flex: 1;
+  min-width: 250px;
+  max-width: 300px;
+  height: 120px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 8px 25px rgba(0,0,0,0.08);
+  transition: 0.3s;
+  text-align: center;
+}
+
+.rect-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 12px 30px rgba(0,0,0,0.12);
+}
+
+.rect-card h3 {
+  color: #333;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.rect-card p {
+  color: #555;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+/* ===== SOS Card Styling ===== */
+.sos-card {
+  border: 2px solid #ff4d4d; /* red border */
+  background: #ffe6e6; /* light red bg */
+}
+
+.sos-card h3 {
+  color: #ff4d4d;
+  font-weight: bold;
+}
+
+.sos-card p {
+  color: #990000;
+  font-weight: bold;
+}
+
+.stops-section {
+  margin-top: 40px;
+  background: white;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.stops-section h2 {
+  margin-bottom: 15px;
+  font-size: 20px;
+}
+
+.stops-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.stops-table th,
+.stops-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.stops-table th {
+  background: #f2f6ff;
+}
