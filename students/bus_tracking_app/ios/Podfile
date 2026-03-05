@@ -1,7 +1,6 @@
-# Podfile for CampusRide (Standard Flutter Template)
+# Podfile for CampusRide
 platform :ios, '14.0'
 
-# CocoaPods analytics sends network stats synchronously affecting flutter build latency.
 ENV['COCOAPODS_DISABLE_STATS'] = '1'
 
 project 'Runner', {
@@ -10,25 +9,36 @@ project 'Runner', {
   'Profile' => :profile,
 }
 
-def flutter_root
-  generated_xcode_build_settings_path = File.expand_path(File.join('..', 'Flutter', 'Generated.xcconfig'), __FILE__)
-  unless File.exist?(generated_xcode_build_settings_path)
-    raise "#{generated_xcode_build_settings_path} must exist. If you're running pod install manually, make sure flutter pub get is executed first"
-  end
+# 1. Use the environment variable set by flutter-action directly
+flutter_root = ENV['FLUTTER_ROOT']
 
-  File.foreach(generated_xcode_build_settings_path) do |line|
-    matches = line.match(/FLUTTER_ROOT=(.*)/)
-    return matches[1].strip.gsub(/\A['"]+|['"]+\z/, "") if matches
+# 2. Fallback to parsing Generated.xcconfig if ENV is not set (for local builds)
+if flutter_root.nil? || flutter_root.empty?
+  generated_xcode_build_settings_path = File.expand_path(File.join('..', 'Flutter', 'Generated.xcconfig'), __FILE__)
+  if File.exist?(generated_xcode_build_settings_path)
+    File.foreach(generated_xcode_build_settings_path) do |line|
+      matches = line.match(/FLUTTER_ROOT=(.*)/)
+      next unless matches
+      flutter_root = matches[1].strip.gsub(/\A['"]+|['"]+\z/, "")
+      break
+    end
   end
-  raise "FLUTTER_ROOT not found in #{generated_xcode_build_settings_path}. Try deleting Generated.xcconfig, then run flutter pub get"
 end
 
-require File.expand_path(File.join('packages', 'flutter_tools', 'bin', 'xcode_backend.rb'), flutter_root)
+if flutter_root.nil? || flutter_root.empty?
+  raise "FLUTTER_ROOT not found. Run 'flutter pub get' first."
+end
+
+# 3. Load the backend script
+# Using require with absolute path but no extension is the safest Ruby pattern
+backend_path = File.expand_path(File.join('packages', 'flutter_tools', 'bin', 'xcode_backend'), flutter_root)
+require backend_path
 
 target 'Runner' do
   use_frameworks!
   use_modular_headers!
 
+  # Install all pods for the plugin
   flutter_install_all_ios_pods File.expand_path(File.join('..', '..'), __FILE__)
 end
 
@@ -36,7 +46,6 @@ post_install do |installer|
   installer.pods_project.targets.each do |target|
     flutter_additional_ios_build_settings(target)
     target.build_configurations.each do |config|
-      # Force iOS 14.0 to resolve google_maps_flutter dependency
       config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '14.0'
     end
   end

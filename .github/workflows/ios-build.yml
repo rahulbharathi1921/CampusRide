@@ -22,6 +22,8 @@ jobs:
       - name: Install dependencies
         working-directory: students/bus_tracking_app
         run: |
+          echo "FLUTTER_ROOT: $FLUTTER_ROOT"
+          ls -R $FLUTTER_ROOT/packages/flutter_tools/bin/xcode_backend.rb || echo "File not found!"
           flutter precache --ios
           flutter pub get
 
