@@ -1,7 +1,6 @@
 # Podfile for CampusRide
 platform :ios, '14.0'
 
-# CocoaPods analytics sends network stats synchronously affecting flutter build latency.
 ENV['COCOAPODS_DISABLE_STATS'] = '1'
 
 project 'Runner', {
@@ -10,35 +9,47 @@ project 'Runner', {
   'Profile' => :profile,
 }
 
-def flutter_install_ios_engine_pod(setup_dir)
-  # This helper is provided by Flutter. It handles finding FLUTTER_ROOT automatically.
-end
-
-# Standard Flutter boilerplate to find FLUTTER_ROOT
+# 1. Find Generated.xcconfig
 generated_xcode_build_settings_path = File.expand_path(File.join('..', 'Flutter', 'Generated.xcconfig'), __FILE__)
-unless File.exist?(generated_xcode_build_settings_path)
-  raise "#{generated_xcode_build_settings_path} must exist. If you're running pod install manually, make sure flutter pub get is executed first"
+
+# 2. Get FLUTTER_ROOT
+flutter_root = ENV['FLUTTER_ROOT']
+if (flutter_root.nil? || flutter_root.empty?) && File.exist?(generated_xcode_build_settings_path)
+  File.foreach(generated_xcode_build_settings_path) do |line|
+    matches = line.match(/FLUTTER_ROOT=(.*)/)
+    if matches
+      flutter_root = matches[1].strip.gsub(/[ "']/, '')
+      break
+    end
+  end
 end
 
-File.foreach(generated_xcode_build_settings_path) do |line|
-  matches = line.match(/FLUTTER_ROOT=(.*)/)
-  next unless matches
-  flutter_root = matches[1].strip.gsub('"', '').gsub("'", "")
-  require File.expand_path(File.join('packages', 'flutter_tools', 'bin', 'xcode_backend.rb'), flutter_root)
+# 3. Fallback to common path if still nil (unlikely on GitHub Actions but good for local)
+if flutter_root.nil? || flutter_root.empty?
+  raise "FLUTTER_ROOT not found. Run 'flutter pub get' first."
 end
+
+# 4. Load xcode_backend.rb
+# Using a more direct approach to avoid path expansion issues
+xcode_backend_path = File.join(flutter_root, 'packages', 'flutter_tools', 'bin', 'xcode_backend.rb')
+unless File.exist?(xcode_backend_path)
+  raise "Could not find xcode_backend.rb at #{xcode_backend_path}"
+end
+require xcode_backend_path
 
 target 'Runner' do
   use_frameworks!
   use_modular_headers!
 
-  flutter_install_all_ios_pods File.expand_path(File.join('..', '..'), __FILE__)
+  # Pass the absolute path to the project root
+  project_root = File.expand_path(File.join('..', '..'), __FILE__)
+  flutter_install_all_ios_pods(project_root)
 end
 
 post_install do |installer|
   installer.pods_project.targets.each do |target|
     flutter_additional_ios_build_settings(target)
     target.build_configurations.each do |config|
-      # Force iOS 14.0 for all pods to avoid version conflicts
       config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '14.0'
     end
   end
