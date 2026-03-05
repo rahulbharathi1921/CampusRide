@@ -9,42 +9,30 @@ project 'Runner', {
   'Profile' => :profile,
 }
 
-def flutter_export_root
-  # 1. Check Environment Variable first (GitHub Actions sets this)
-  return ENV['FLUTTER_ROOT'] if ENV['FLUTTER_ROOT'] && !ENV['FLUTTER_ROOT'].empty?
-
-  # 2. Parse Generated.xcconfig
+# 1. Standard Ruby script to find Flutter Root from Generated.xcconfig
+# This is the industry standard way that works on local and CI
+def flutter_root
   generated_xcode_build_settings_path = File.expand_path(File.join('..', 'Flutter', 'Generated.xcconfig'), __FILE__)
-  if File.exist?(generated_xcode_build_settings_path)
-    File.foreach(generated_xcode_build_settings_path) do |line|
-      matches = line.match(/FLUTTER_ROOT\s*=\s*(.*)/)
-      next unless matches
-      # Remove any quotes and surrounding whitespace
-      return matches[1].strip.gsub(/\A['"]+|['"]+\z/, "")
+  unless File.exist?(generated_xcode_build_settings_path)
+    raise "#{generated_xcode_build_settings_path} must exist. If you're running pod install manually, make sure flutter pub get is executed first"
+  end
+
+  File.foreach(generated_xcode_build_settings_path) do |line|
+    # Look for FLUTTER_ROOT= with or without spaces/quotes
+    if line =~ /FLUTTER_ROOT\s*=\s*(.*)/
+      return $1.strip.gsub(/\A['"]+|['"]+\z/, "")
     end
   end
-  
-  # 3. Fallback
-  nil
+  raise "FLUTTER_ROOT not found in #{generated_xcode_build_settings_path}"
 end
 
-flutter_root = flutter_export_root
-if flutter_root.nil?
-  raise "FLUTTER_ROOT not found. Please run 'flutter pub get' in the app directory."
-end
-
-# Load the backend script provided by Flutter
-xcode_backend_path = File.expand_path(File.join('packages', 'flutter_tools', 'bin', 'xcode_backend.rb'), flutter_root)
-unless File.exist?(xcode_backend_path)
-  raise "Could not find xcode_backend.rb at #{xcode_backend_path}. Check your Flutter installation."
-end
-require xcode_backend_path
+# 2. Load the backend
+load File.join(flutter_root, 'packages', 'flutter_tools', 'bin', 'xcode_backend.rb')
 
 target 'Runner' do
   use_frameworks!
   use_modular_headers!
 
-  # Install pods for all plugins
   flutter_install_all_ios_pods File.expand_path(File.join('..', '..'), __FILE__)
 end
 
@@ -52,7 +40,6 @@ post_install do |installer|
   installer.pods_project.targets.each do |target|
     flutter_additional_ios_build_settings(target)
     target.build_configurations.each do |config|
-      # Standardize iOS target to 14.0 for all dependencies
       config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '14.0'
     end
   end
