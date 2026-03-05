@@ -1,0 +1,40 @@
+name: Build iOS IPA
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          flutter-version-file: students/bus_tracking_app/pubspec.yaml
+
+      - name: Install dependencies
+        working-directory: students/bus_tracking_app
+        run: flutter pub get
+
+      - name: Build iOS (No Codesign)
+        working-directory: students/bus_tracking_app
+        run: flutter build ios --release --no-codesign
+
+      - name: Prepare IPA for AltStore
+        run: |
+          mkdir -p Payload
+          cp -r students/bus_tracking_app/build/ios/iphoneos/Runner.app Payload/
+          zip -r CampusRide.ipa Payload
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: CampusRide-iOS-IPA
+          path: CampusRide.ipa
+          retention-days: 7
