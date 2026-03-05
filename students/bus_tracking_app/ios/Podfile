@@ -1,6 +1,7 @@
-# Podfile for CampusRide
+# Podfile for CampusRide (Standard Flutter Template)
 platform :ios, '14.0'
 
+# CocoaPods analytics sends network stats synchronously affecting flutter build latency.
 ENV['COCOAPODS_DISABLE_STATS'] = '1'
 
 project 'Runner', {
@@ -9,8 +10,6 @@ project 'Runner', {
   'Profile' => :profile,
 }
 
-# 1. Standard Ruby script to find Flutter Root from Generated.xcconfig
-# This is the industry standard way that works on local and CI
 def flutter_root
   generated_xcode_build_settings_path = File.expand_path(File.join('..', 'Flutter', 'Generated.xcconfig'), __FILE__)
   unless File.exist?(generated_xcode_build_settings_path)
@@ -18,16 +17,13 @@ def flutter_root
   end
 
   File.foreach(generated_xcode_build_settings_path) do |line|
-    # Look for FLUTTER_ROOT= with or without spaces/quotes
-    if line =~ /FLUTTER_ROOT\s*=\s*(.*)/
-      return $1.strip.gsub(/\A['"]+|['"]+\z/, "")
-    end
+    matches = line.match(/FLUTTER_ROOT=(.*)/)
+    return matches[1].strip.gsub(/\A['"]+|['"]+\z/, "") if matches
   end
-  raise "FLUTTER_ROOT not found in #{generated_xcode_build_settings_path}"
+  raise "FLUTTER_ROOT not found in #{generated_xcode_build_settings_path}. Try deleting Generated.xcconfig, then run flutter pub get"
 end
 
-# 2. Load the backend
-load File.join(flutter_root, 'packages', 'flutter_tools', 'bin', 'xcode_backend.rb')
+require File.expand_path(File.join('packages', 'flutter_tools', 'bin', 'xcode_backend.rb'), flutter_root)
 
 target 'Runner' do
   use_frameworks!
@@ -40,6 +36,7 @@ post_install do |installer|
   installer.pods_project.targets.each do |target|
     flutter_additional_ios_build_settings(target)
     target.build_configurations.each do |config|
+      # Force iOS 14.0 to resolve google_maps_flutter dependency
       config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '14.0'
     end
   end
